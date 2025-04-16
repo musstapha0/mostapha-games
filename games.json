@@ -1,0 +1,55 @@
+[
+  {
+    "id": "game1",
+    "title": { "ar": "اسم اللعبة الأولى", "en": "First Game Title" },
+    "description": { "ar": "وصف مختصر وجذاب للعبة الأولى.", "en": "A short and engaging description for the first game." },
+    "image": "placeholder-game1.jpg",
+    "altText": { "ar": "غلاف لعبة 1", "en": "Game 1 Cover" },
+    "category": "action",
+    "tags": ["action", "adventure"],
+    "platforms": ["pc", "android"],
+    "releaseDate": "2025-04-15",
+    "popularityScore": 85,
+    "downloadUrl": "REPLACE_WITH_REAL_DOWNLOAD_LINK_1"
+  },
+  {
+    "id": "game2",
+    "title": { "ar": "لعبة استراتيجية X", "en": "Strategy Game X" },
+    "description": { "ar": "لعبة استراتيجية تعتمد على التخطيط.", "en": "Strategy game focused on planning." },
+    "image": "placeholder-game2.jpg",
+    "altText": { "ar": "غلاف لعبة 2", "en": "Game 2 Cover" },
+    "category": "strategy",
+    "tags": ["strategy", "building"],
+    "platforms": ["pc"],
+    "releaseDate": "2025-03-20",
+    "popularityScore": 92,
+    "downloadUrl": "REPLACE_WITH_REAL_DOWNLOAD_LINK_2"
+  },
+  {
+    "id": "game3",
+    "title": { "ar": "مغامرات الفضاء Z", "en": "Space Adventures Z" },
+    "description": { "ar": "استكشف المجرات في هذه المغامرة.", "en": "Explore galaxies in this adventure." },
+    "image": "placeholder-game3.jpg",
+    "altText": { "ar": "غلاف لعبة 3", "en": "Game 3 Cover" },
+    "category": "adventure",
+    "tags": ["adventure", "space"],
+    "platforms": ["android", "ios"],
+    "releaseDate": "2025-04-01",
+    "popularityScore": 78,
+    "downloadUrl": "REPLACE_WITH_REAL_DOWNLOAD_LINK_3"
+  },
+   {
+    "id": "game4",
+    "title": { "ar": "لعبة ألغاز العقل", "en": "Mind Puzzle Game" },
+    "description": { "ar": "تحدى عقلك مع ألغاز مبتكرة.", "en": "Challenge your mind with innovative puzzles." },
+    "image": "placeholder-game4.jpg",
+    "altText": { "ar": "غلاف لعبة 4", "en": "Game 4 Cover" },
+    "category": "puzzle",
+    "tags": ["puzzle", "logic"],
+    "platforms": ["android"],
+    "releaseDate": "2024-12-10",
+    "popularityScore": 88,
+    "downloadUrl": "REPLACE_WITH_REAL_DOWNLOAD_LINK_4"
+  }
+  // أضف المزيد من الألعاب هنا... تأكد من الفواصل الصحيحة
+]
