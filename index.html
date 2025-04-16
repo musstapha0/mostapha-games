@@ -13,18 +13,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* نفس متغيرات CSS والـ Reset من المثال السابق */
         :root {
-             --dark-blue-bg: #0a192f; --medium-dark-blue: #1c2541; --primary-blue: #61dafb;
-             --action-blue: #00aaff; --text-light: #e0fbfc; --text-secondary: #a8b2d1;
-             --card-bg: #0f284a; --heading-font: 'Exo 2', sans-serif; --body-font: 'Open Sans', sans-serif;
-             --danger-color: #ff4d4f; /* لون للأخطاء */
+            --dark-blue-bg: #0a192f; --medium-dark-blue: #1c2541; --primary-blue: #61dafb;
+            --action-blue: #00aaff; --text-light: #e0fbfc; --text-secondary: #a8b2d1;
+            --card-bg: #0f284a; --heading-font: 'Exo 2', sans-serif; --body-font: 'Open Sans', sans-serif;
+            --danger-color: #ff4d4f;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--body-font); line-height: 1.6; color: var(--text-light); background-color: var(--dark-blue-bg); }
         .container { width: 90%; max-width: 1300px; margin: 0 auto; padding: 20px 0; }
 
-        /* --- Header --- */
         .main-header { background-color: rgba(10, 25, 47, 0.85); padding: 10px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); }
         .header-content { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1300px; margin: 0 auto; flex-wrap: wrap; gap: 15px; }
         .logo { font-family: var(--heading-font); font-size: 1.8em; color: var(--primary-blue); text-decoration: none; white-space: nowrap; }
@@ -36,7 +34,6 @@
         .lang-switcher button { background: none; border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 5px 10px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s, color 0.3s; margin-inline-start: 5px;}
         .lang-switcher button.active { background-color: var(--primary-blue); color: var(--dark-blue-bg); font-weight: bold;}
 
-        /* --- Filters & Sorting --- */
         .controls-section { background-color: var(--medium-dark-blue); padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center;}
         .filter-group, .sort-group { display: flex; flex-wrap: wrap; align-items: center; gap: 10px;}
         .filter-group label, .sort-group label { margin-inline-end: 8px; font-weight: 600; white-space: nowrap;}
@@ -46,7 +43,6 @@
         }
         .filter-group select:focus, .sort-group select:focus { outline: none; box-shadow: 0 0 5px var(--primary-blue); }
 
-        /* --- Game Grid (No significant changes needed from previous) --- */
         .games-grid-section h2 { font-family: var(--heading-font); font-size: 2em; color: var(--primary-blue); text-align: center; margin-bottom: 40px; }
         .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .game-card { background-color: var(--card-bg); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
@@ -62,17 +58,14 @@
         .download-button i { margin-inline-end: 8px; }
         .download-button:hover { background-color: #0088cc; transform: scale(1.03); }
 
-        /* --- Load More Button --- */
         .load-more-container { text-align: center; margin-top: 40px; }
         .load-more-btn { background-color: var(--action-blue); color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: 600; transition: background-color 0.3s ease; }
         .load-more-btn:hover { background-color: #0088cc; }
         .load-more-btn:disabled { background-color: var(--text-secondary); cursor: not-allowed; }
-        .load-more-btn.hidden { display: none; } /* لإخفاء الزر */
+        .load-more-btn.hidden { display: none; }
 
-
-        /* --- Timer View (No significant changes needed from previous) --- */
         #timer-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 25, 47, 0.95); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.5s ease; }
-        #timer-view.visible { opacity: 1; display: flex !important; /* Override initial display:none */ }
+        #timer-view.visible { opacity: 1; display: flex !important; }
         .download-container { background-color: var(--card-bg); padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); text-align: center; max-width: 700px; width: 100%; position: relative; }
         .close-timer-btn { position: absolute; top: 15px; inset-inline-start: 15px; font-size: 1.5em; color: var(--text-secondary); cursor: pointer; transition: color 0.3s ease; background: none; border: none; padding: 0; }
         .close-timer-btn:hover { color: var(--primary-blue); }
@@ -81,31 +74,29 @@
         .timer-game-description { color: var(--text-secondary); margin-bottom: 30px; font-size: 1em; max-height: 100px; overflow-y: auto; padding-inline-end: 10px; }
         .timer-game-description::-webkit-scrollbar { width: 5px; } .timer-game-description::-webkit-scrollbar-track { background: var(--medium-dark-blue); border-radius: 10px;} .timer-game-description::-webkit-scrollbar-thumb { background-color: var(--primary-blue); border-radius: 10px; }
         .timer-container { margin-bottom: 25px; } .timer-text { font-size: 1.2em; color: var(--text-secondary); margin-bottom: 15px; } .timer-display { font-family: var(--heading-font); font-size: 4em; color: var(--primary-blue); font-weight: bold; line-height: 1; }
-        .status-message { font-size: 1em; color: var(--action-blue); min-height: 1.5em; margin-top: 20px; } .download-notice { font-size: 0.85em; color: var(--text-secondary); margin-top: 30px; } .download-notice a { color: var(--primary-blue); }
+        .status-message { font-size: 1em; color: var(--action-blue); min-height: 1.5em; margin-top: 20px; }
+        .download-notice { font-size: 0.85em; color: var(--text-secondary); margin-top: 30px; }
+        .download-notice a { color: var(--primary-blue); }
         #real-download-link { display: none; }
 
-        /* --- Footer (No significant changes) --- */
         .main-footer { background-color: var(--medium-dark-blue); color: var(--text-secondary); text-align: center; padding: 25px 0; margin-top: 50px; border-top: 3px solid var(--primary-blue); }
         .footer-content p { margin-bottom: 10px; } .footer-content a { color: var(--primary-blue); text-decoration: none; margin: 0 10px; } .footer-content a:hover { text-decoration: underline; }
 
-        /* --- Responsive --- */
         @media (max-width: 992px) {
              .games-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
              .controls-section { flex-direction: column; align-items: stretch; gap: 15px;}
              .filter-group, .sort-group { justify-content: space-between;}
              .filter-group select, .sort-group select { flex-grow: 1; }
         }
-         @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .header-content { flex-direction: column; gap: 10px;}
             .search-bar input[type="search"] { width: 100%; }
-            .featured-section h2 { font-size: 2em; }
             .timer-game-title {font-size: 1.5em;} .timer-display {font-size: 3em;} .download-container {padding: 30px 20px;}
         }
-         @media (max-width: 480px) {
+        @media (max-width: 480px) {
             .games-grid { grid-template-columns: 1fr; } .logo { font-size: 1.5em; } .timer-game-thumbnail {width: 100px; height: 100px;}
-         }
+        }
 
-        /* Helper class for loading state */
         .loading::after { content: '...'; display: inline-block; animation: dots 1s steps(3, end) infinite; }
         @keyframes dots { 0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0);} 40% { color: var(--text-light); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0);} 60% { text-shadow: .25em 0 0 var(--text-light), .5em 0 0 rgba(0,0,0,0);} 80%, 100% { text-shadow: .25em 0 0 var(--text-light), .5em 0 0 var(--text-light);}}
     </style>
@@ -135,13 +126,13 @@
                         <label for="category-filter" data-key="filterCategoryLabel">الفئة:</label>
                         <select id="category-filter">
                             <option value="all" data-key="filterAllCategories">جميع الفئات</option>
-                            </select>
+                        </select>
                     </div>
                     <div class="filter-group">
                          <label for="platform-filter" data-key="filterPlatformLabel">المنصة:</label>
                          <select id="platform-filter">
                             <option value="all" data-key="filterAllPlatforms">جميع المنصات</option>
-                            </select>
+                        </select>
                     </div>
                     <div class="sort-group">
                         <label for="sort-select" data-key="sortLabel">فرز حسب:</label>
@@ -159,12 +150,14 @@
                         <p id="loading-indicator" data-key="loadingGames" class="loading">جاري تحميل الألعاب...</p>
                     </div>
                     <div class="load-more-container">
-                         <button id="load-more-btn" class="load-more-btn hidden" data-key="loadMoreBtn">تحميل المزيد</button>
+                         <button id="load-more-btn" class="load-more-btn hidden" data-key-text="loadMoreBtn"><span>تحميل المزيد</span></button>
                     </div>
                 </section>
 
             </div>
-        </div> <div id="timer-view">
+        </div>
+
+        <div id="timer-view" style="display: none;">
             <div class="download-container">
                 <button class="close-timer-btn" data-key-title="closeButtonTitle" title="إغلاق" aria-label="Close Download Panel"><i class="fas fa-times"></i></button>
                 <img id="timer-game-img" src="placeholder-game-thumb.jpg" alt="Game Thumbnail" data-key-alt="timerGameAlt" class="timer-game-thumbnail">
@@ -175,11 +168,13 @@
                     <div id="timer-display" class="timer-display">10</div>
                 </div>
                 <p id="status-message" class="status-message" data-key="statusPreparing">جاري تحضير الرابط...</p>
-                <p class="download-notice" data-key="downloadNoticeContainer">
-                    </p>
+                <p class="download-notice">
+                </p>
             </div>
             <a id="real-download-link" href="#" download></a>
-        </div> </main>
+        </div>
+
+    </main>
 
     <footer class="main-footer">
         <div class="footer-content">
@@ -194,7 +189,6 @@
     </footer>
 
     <script>
-    // --- Translations Object ---
     const translations = {
         'ar': {
             'siteTitle': 'مركز الألعاب - تحميل أحدث الألعاب', 'siteDescription': 'اكتشف وحمل أحدث وأفضل الألعاب للكمبيوتر والموبايل. تحميلات آمنة ومباشرة.',
@@ -203,10 +197,10 @@
             'allGamesTitle': 'جميع الألعاب', 'downloadNow': 'تحميل الآن',
             'filterCategoryLabel': 'الفئة:', 'filterAllCategories': 'جميع الفئات', 'filterPlatformLabel': 'المنصة:', 'filterAllPlatforms': 'جميع المنصات',
             'sortLabel': 'فرز حسب:', 'sortDefault': 'الافتراضي', 'sortNewest': 'الأحدث', 'sortPopularity': 'الأكثر شعبية',
-            'loadingGames': 'جاري تحميل الألعاب...', 'loadMoreBtn': 'تحميل المزيد', 'errorLoadingGames': 'فشل تحميل بيانات الألعاب.',
-            'tagAction': 'أكشن', 'tagAdventure': 'مغامرات', 'tagStrategy': 'استراتيجية', 'tagPuzzle': 'ألغاز', 'tagBuilding': 'بناء', 'tagSpace': 'فضاء', 'tagLogic': 'منطق', /* Add more tags */
-            'platformPc': 'PC', 'platformAndroid': 'Android', 'platformIos': 'iOS', /* Add more platforms */
-            'gameImageAlt': 'غلاف لعبة {gameName}', // {gameName} will be replaced
+            'loadingGames': 'جاري تحميل الألعاب...', 'loadMoreBtn': 'تحميل المزيد', 'errorLoadingGames': 'فشل تحميل بيانات الألعاب.', 'noGamesFound': 'لم يتم العثور على ألعاب تطابق معايير البحث.',
+            'tagAction': 'أكشن', 'tagAdventure': 'مغامرات', 'tagStrategy': 'استراتيجية', 'tagPuzzle': 'ألغاز', 'tagBuilding': 'بناء', 'tagSpace': 'فضاء', 'tagLogic': 'منطق',
+            'platformPc': 'PC', 'platformAndroid': 'Android', 'platformIos': 'iOS',
+            'gameImageAlt': 'غلاف لعبة {gameName}',
             'timerPageTitle': 'جاري تحضير التحميل...', 'timerGameAlt': 'صورة مصغرة للعبة', 'timerText': 'سيبدأ التحميل خلال:',
             'statusPreparing': 'جاري تحضير الرابط...', 'statusCountdown': 'سيتم تحويلك للتحميل خلال {timeLeft} ثانية...', 'statusStarting': 'بدء التحميل...',
             'statusErrorNoLink': 'خطأ: رابط التحميل غير متوفر!', 'statusErrorNoStart': 'خطأ: لا يمكن بدء التحميل بدون رابط صالح.',
@@ -226,10 +220,10 @@
              'allGamesTitle': 'All Games', 'downloadNow': 'Download Now',
              'filterCategoryLabel': 'Category:', 'filterAllCategories': 'All Categories', 'filterPlatformLabel': 'Platform:', 'filterAllPlatforms': 'All Platforms',
              'sortLabel': 'Sort by:', 'sortDefault': 'Default', 'sortNewest': 'Newest', 'sortPopularity': 'Most Popular',
-             'loadingGames': 'Loading games...', 'loadMoreBtn': 'Load More', 'errorLoadingGames': 'Failed to load games data.',
-             'tagAction': 'Action', 'tagAdventure': 'Adventure', 'tagStrategy': 'Strategy', 'tagPuzzle': 'Puzzle', 'tagBuilding': 'Building', 'tagSpace': 'Space', 'tagLogic': 'Logic', /* Add more tags */
-             'platformPc': 'PC', 'platformAndroid': 'Android', 'platformIos': 'iOS', /* Add more platforms */
-             'gameImageAlt': '{gameName} Cover', // {gameName} will be replaced
+             'loadingGames': 'Loading games...', 'loadMoreBtn': 'Load More', 'errorLoadingGames': 'Failed to load games data.', 'noGamesFound': 'No games found matching your criteria.',
+             'tagAction': 'Action', 'tagAdventure': 'Adventure', 'tagStrategy': 'Strategy', 'tagPuzzle': 'Puzzle', 'tagBuilding': 'Building', 'tagSpace': 'Space', 'tagLogic': 'Logic',
+             'platformPc': 'PC', 'platformAndroid': 'Android', 'platformIos': 'iOS',
+             'gameImageAlt': '{gameName} Cover',
              'timerPageTitle': 'Preparing Download...', 'timerGameAlt': 'Game Thumbnail', 'timerText': 'Your download will begin in:',
              'statusPreparing': 'Preparing link...', 'statusCountdown': 'Redirecting to download in {timeLeft} seconds...', 'statusStarting': 'Starting download...',
              'statusErrorNoLink': 'Error: Download link is not available!', 'statusErrorNoStart': 'Error: Cannot start download without a valid link.',
@@ -244,19 +238,18 @@
         }
     };
 
-    // --- Global State & Config ---
-    let currentLanguage = 'ar'; // Default, will be updated
-    let allGames = []; // To store all games fetched from JSON
-    let filteredGames = []; // To store games after filtering/sorting
-    let itemsPerPage = 6; // Number of games to show initially and per "Load More" click
+    let currentLanguage = 'ar';
+    let allGames = [];
+    let filteredGames = [];
+    let itemsPerPage = 6;
     let itemsDisplayed = 0;
     let currentSort = 'default';
     let currentCategoryFilter = 'all';
     let currentPlatformFilter = 'all';
     let currentSearchTerm = '';
     let countdownInterval = null;
+    let searchDebounceTimer = null;
 
-    // --- DOM Elements ---
     const mainView = document.getElementById('main-view');
     const timerView = document.getElementById('timer-view');
     const closeTimerButton = timerView.querySelector('.close-timer-btn');
@@ -277,195 +270,191 @@
     const searchInput = document.getElementById('search-input');
     const langBtnAr = document.getElementById('lang-ar');
     const langBtnEn = document.getElementById('lang-en');
-    const langButtons = [langBtnAr, langBtnEn]; // Array for easier handling
+    const langButtons = [langBtnAr, langBtnEn];
 
-    // --- Platform Icons Mapping ---
     const platformIcons = {
         pc: '<i class="fab fa-windows" title="PC"></i>',
         android: '<i class="fab fa-android" title="Android"></i>',
         ios: '<i class="fab fa-apple" title="iOS"></i>',
-        // Add more platforms and icons
     };
 
-    // --- Translation Function ---
+    const tagTranslations = {
+        'ar': {'action': 'أكشن', 'adventure': 'مغامرات', 'strategy': 'استراتيجية', 'puzzle': 'ألغاز', 'building': 'بناء', 'space': 'فضاء', 'logic': 'منطق'},
+        'en': {'action': 'Action', 'adventure': 'Adventure', 'strategy': 'Strategy', 'puzzle': 'Puzzle', 'building': 'Building', 'space': 'Space', 'logic': 'Logic'}
+    };
+     const categoryTranslations = {
+         'ar': {'action': 'أكشن', 'adventure': 'مغامرات', 'strategy': 'استراتيجية', 'puzzle': 'ألغاز'},
+         'en': {'action': 'Action', 'adventure': 'Adventure', 'strategy': 'Strategy', 'puzzle': 'Puzzle'}
+     };
+     const platformTranslations = {
+         'ar': {'pc': 'PC', 'android': 'Android', 'ios': 'iOS'},
+         'en': {'pc': 'PC', 'android': 'Android', 'ios': 'iOS'}
+     };
+
+
     function translatePage(lang) {
         if (!translations[lang]) { lang = 'ar'; }
         currentLanguage = lang;
-        localStorage.setItem('preferredLang', lang); // Save preference
+        localStorage.setItem('preferredLang', lang);
         const dir = (lang === 'ar') ? 'rtl' : 'ltr';
         document.documentElement.lang = lang;
         document.documentElement.dir = dir;
         document.body.style.direction = dir;
 
-        // Update language switcher buttons state
-        langButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
+        langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
 
-        // Update static text using data-key
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.dataset.key;
             const translation = translations[lang][key];
             if (translation !== undefined) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                     if(el.type === 'search' || el.type === 'text') el.placeholder = translation;
-                } else if (['siteLogo'].includes(key)) el.innerHTML = translation;
-                 else el.textContent = translation;
+                if (el.tagName === 'INPUT' && (el.type === 'search' || el.type === 'text')) { el.placeholder = translation; }
+                 else if (['siteLogo'].includes(key)) { el.innerHTML = translation; }
+                 else { el.textContent = translation; }
             } else { console.warn(`Missing translation key: ${key} for lang: ${lang}`); }
         });
-        // Update button text (inside spans)
+
          document.querySelectorAll('button[data-key-text] span, a[data-key-text] span').forEach(el => {
-             const key = el.parentElement.dataset.keyText;
-             if(el.parentElement.classList.contains('download-button')){ // Only update download buttons here
-                 const translation = translations[lang][key];
-                if (translation !== undefined) el.textContent = translation;
-                else console.warn(`Missing translation key (text): ${key} for lang: ${lang}`);
-             } else { // Update other buttons like load more
-                 const translation = translations[lang][key];
-                if (translation !== undefined) el.parentElement.textContent = translation; // Update button directly if no span
-                else console.warn(`Missing translation key (text): ${key} for lang: ${lang}`);
-             }
+             const parent = el.parentElement;
+             const key = parent.dataset.keyText;
+             const translation = translations[lang][key];
+             if (translation !== undefined) {
+                 if(parent.classList.contains('load-more-btn')){
+                    el.textContent = translation; // Assume load more has span
+                 } else if (parent.classList.contains('download-button')) {
+                    el.textContent = translation;
+                 }
+             } else { console.warn(`Missing translation key (text): ${key} for lang: ${lang}`); }
         });
-        // Update title attributes
+
+
         document.querySelectorAll('[data-key-title]').forEach(el => {
-             const key = el.dataset.keyTitle;
-             if (translations[lang][key] !== undefined) el.title = translations[lang][key];
+            const key = el.dataset.keyTitle;
+            if (translations[lang][key] !== undefined) { el.title = translations[lang][key]; }
         });
-         // Update alt attributes (Note: Game specific alts are handled during render)
-         document.querySelectorAll('img[data-key-alt]:not(.game-card img)').forEach(el => { // Exclude game card images
-             const key = el.dataset.keyAlt;
-             if (translations[lang][key] !== undefined) el.alt = translations[lang][key];
-         });
-        // Update page title, meta description
+         document.querySelectorAll('img[data-key-alt]:not(.game-card img)').forEach(el => {
+            const key = el.dataset.keyAlt;
+            if (translations[lang][key] !== undefined) { el.alt = translations[lang][key]; }
+        });
+
         if(translations[lang]['siteTitle']) document.title = translations[lang]['siteTitle'];
         const metaDesc = document.querySelector('meta[name="description"]');
         if(metaDesc && translations[lang]['siteDescription']) metaDesc.content = translations[lang]['siteDescription'];
-        // Update footer year text
+
         const year = new Date().getFullYear();
         const footerRightsP = document.querySelector('p[data-key="footerRights"]');
-        if(footerRightsP && translations[lang]['footerRights']) footerRightsP.textContent = translations[lang]['footerRights'].replace('{year}', year);
-        // Update dynamic link inner text if needed
-        document.querySelectorAll('a[data-key-link]').forEach(el => {
+        if(footerRightsP && translations[lang]['footerRights']) {
+             footerRightsP.textContent = translations[lang]['footerRights'].replace('{year}', year);
+        }
+
+         document.querySelectorAll('a[data-key-link]').forEach(el => {
              const key = el.dataset.keyLink;
-             if (translations[lang][key]) { el.textContent = translations[lang][key]; }
-        });
-         // Update options in select elements
-        document.querySelectorAll('select option[data-key]').forEach(el => {
-             const key = el.dataset.key;
              if (translations[lang][key]) { el.textContent = translations[lang][key]; }
          });
 
-         // Re-render games if the list is already loaded, to apply translated titles/desc
-         if (allGames.length > 0) {
-             renderGames(true); // Pass true to indicate it's just a re-render after translation
-         }
+         document.querySelectorAll('select option[data-key]').forEach(el => {
+             const key = el.dataset.key;
+             if (translations[lang][key]) { el.textContent = translations[lang][key]; }
+              else if(el.value !== 'all'){ // Attempt to translate dynamic options based on value
+                 const type = el.parentElement.id === 'category-filter' ? 'category' : 'platform';
+                 const transMap = type === 'category' ? categoryTranslations : platformTranslations;
+                 if(transMap[lang]?.[el.value]){
+                     el.textContent = transMap[lang][el.value];
+                 }
+              }
+         });
+
+         if (allGames.length > 0) { renderGames(true); }
     }
 
-    // --- Language Detection (Checks localStorage first) ---
     function detectLanguage() {
         const savedLang = localStorage.getItem('preferredLang');
-        if (savedLang && translations[savedLang]) {
-            return savedLang;
-        }
+        if (savedLang && translations[savedLang]) { return savedLang; }
         const preferredLanguages = navigator.languages || [navigator.language || navigator.userLanguage];
         for (let lang of preferredLanguages) {
             const langCode = lang.split('-')[0];
             if (translations[langCode]) { return langCode; }
         }
-        return 'ar'; // Default
+        return 'ar';
     }
 
-    // --- Populate Filter Options ---
     function populateFilters(games) {
         const categories = new Set();
         const platforms = new Set();
         games.forEach(game => {
-            if (game.category) categories.add(game.category);
-            if (game.platforms) game.platforms.forEach(p => platforms.add(p));
+            if (game.category) categories.add(game.category.toLowerCase());
+            if (game.platforms) game.platforms.forEach(p => platforms.add(p.toLowerCase()));
         });
 
-        // Populate Categories
+        categoryFilterSelect.innerHTML = `<option value="all" data-key="filterAllCategories">${translations[currentLanguage]['filterAllCategories']}</option>`; // Reset
         categories.forEach(category => {
             const option = document.createElement('option');
             option.value = category;
-            const categoryKey = `category${category.charAt(0).toUpperCase() + category.slice(1)}`; // e.g., categoryAction
-            option.dataset.key = categoryKey; // Add key for translation
-             option.textContent = translations[currentLanguage][categoryKey] || category; // Set initial text
+            const translatedCategory = categoryTranslations[currentLanguage]?.[category] || category;
+            option.textContent = translatedCategory;
             categoryFilterSelect.appendChild(option);
-             // Add translation for the category key if missing
-             if (!translations['ar'][categoryKey]) translations['ar'][categoryKey] = category; // Use original as fallback
-             if (!translations['en'][categoryKey]) translations['en'][categoryKey] = category;
         });
 
-        // Populate Platforms
+        platformFilterSelect.innerHTML = `<option value="all" data-key="filterAllPlatforms">${translations[currentLanguage]['filterAllPlatforms']}</option>`; // Reset
         platforms.forEach(platform => {
              const option = document.createElement('option');
              option.value = platform;
-             const platformKey = `platform${platform.charAt(0).toUpperCase() + platform.slice(1)}`; // e.g., platformPc
-             option.dataset.key = platformKey; // Add key for translation
-             option.textContent = translations[currentLanguage][platformKey] || platform; // Set initial text
+             const translatedPlatform = platformTranslations[currentLanguage]?.[platform] || platform;
+             option.textContent = translatedPlatform;
              platformFilterSelect.appendChild(option);
-              // Add translation for the platform key if missing
-             if (!translations['ar'][platformKey]) translations['ar'][platformKey] = platform;
-             if (!translations['en'][platformKey]) translations['en'][platformKey] = platform;
         });
     }
 
-    // --- Game Filtering, Sorting, Rendering ---
     function applyFiltersAndSort() {
          filteredGames = allGames.filter(game => {
             const categoryMatch = currentCategoryFilter === 'all' || game.category?.toLowerCase() === currentCategoryFilter;
-            const platformMatch = currentPlatformFilter === 'all' || game.platforms?.includes(currentPlatformFilter);
-            const searchMatch = currentSearchTerm === '' ||
-                                (game.title[currentLanguage] || game.title['en'])?.toLowerCase().includes(currentSearchTerm) ||
-                                (game.description[currentLanguage] || game.description['en'])?.toLowerCase().includes(currentSearchTerm);
+            const platformMatch = currentPlatformFilter === 'all' || game.platforms?.map(p=>p.toLowerCase()).includes(currentPlatformFilter);
+            const title = game.title[currentLanguage] || game.title['en'] || '';
+            const description = game.description[currentLanguage] || game.description['en'] || '';
+            const searchMatch = currentSearchTerm === '' || title.toLowerCase().includes(currentSearchTerm) || description.toLowerCase().includes(currentSearchTerm);
             return categoryMatch && platformMatch && searchMatch;
         });
 
-        // Apply Sorting
         switch (currentSort) {
-            case 'newest':
-                filteredGames.sort((a, b) => new Date(b.releaseDate || 0) - new Date(a.releaseDate || 0));
-                break;
-            case 'popularity':
-                filteredGames.sort((a, b) => (b.popularityScore || 0) - (a.popularityScore || 0));
-                break;
-            case 'default': // Or alphabetical, or leave as is from JSON
-                 filteredGames.sort((a, b) => (a.title[currentLanguage] || a.title['en']).localeCompare(b.title[currentLanguage] || b.title['en']));
-                break;
+            case 'newest': filteredGames.sort((a, b) => new Date(b.releaseDate || 0) - new Date(a.releaseDate || 0)); break;
+            case 'popularity': filteredGames.sort((a, b) => (b.popularityScore || 0) - (a.popularityScore || 0)); break;
+            case 'default': filteredGames.sort((a, b) => (a.title[currentLanguage] || a.title['en']).localeCompare(b.title[currentLanguage] || b.title['en'], currentLanguage)); break; // Locale aware sort
         }
     }
 
     function renderGames(isRerender = false) {
-        if (!isRerender) { // Only filter and sort if it's not just a language change re-render
-            applyFiltersAndSort();
-        }
-        // For re-render, filteredGames should already hold the correctly sorted/filtered list
+        if (!isRerender) { applyFiltersAndSort(); }
 
-        loadingIndicator.style.display = 'none'; // Hide loading indicator
+        loadingIndicator.style.display = 'none';
         const gamesToShow = filteredGames.slice(0, itemsDisplayed);
-        gamesGrid.innerHTML = ''; // Clear previous games
 
-        if (gamesToShow.length === 0 && !isRerender) { // Show 'no results' only if not a re-render
-             gamesGrid.innerHTML = `<p style="color: var(--text-secondary); text-align: center;">${translations[currentLanguage]['noGamesFound'] || 'No games found matching your criteria.'}</p>`; // Add key 'noGamesFound'
-             loadMoreBtn.classList.add('hidden');
-             return; // Exit early
+        if(!isRerender || gamesGrid.innerHTML === '' || gamesGrid.querySelector('#loading-indicator')){
+            gamesGrid.innerHTML = ''; // Clear only if not just re-rendering existing cards for language or if grid is empty/loading
         }
 
+
+        if (gamesToShow.length === 0 ) {
+            if (gamesGrid.innerHTML === '') { // Avoid showing 'no results' if just switching language on existing results
+                 gamesGrid.innerHTML = `<p style="color: var(--text-secondary); text-align: center;" data-key="noGamesFound">${translations[currentLanguage]['noGamesFound'] || 'No games found.'}</p>`;
+            }
+             loadMoreBtn.classList.add('hidden');
+             return;
+        }
+
+        // Determine which games are new to render if using load more append strategy (more complex)
+        // Simple strategy: always clear and re-render the visible portion
+        gamesGrid.innerHTML = ''; // Clear for re-render
 
         gamesToShow.forEach(game => {
             const gameCard = document.createElement('article');
             gameCard.className = 'game-card';
-
             const title = game.title[currentLanguage] || game.title['en'];
             const description = game.description[currentLanguage] || game.description['en'];
-            const altTextKey = `${game.id}Alt`; // Use game ID for unique alt text key
-            const altText = translations[currentLanguage][altTextKey] || (translations['en'][altTextKey] ? translations['en'][altTextKey].replace('{gameName}', title) : `${title} Cover`);
-
+            const altTextKey = `${game.id}Alt`;
+            const altText = (translations[currentLanguage][altTextKey] || translations['en'][altTextKey] || translations[currentLanguage]['gameImageAlt'] || '{gameName} Cover').replace('{gameName}', title);
 
             const tagsHTML = game.tags.map(tag => {
                 const tagKey = `tag${tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase()}`;
-                const translatedTag = translations[currentLanguage][tagKey] || tag;
+                const translatedTag = tagTranslations[currentLanguage]?.[tag.toLowerCase()] || tag;
                 return `<span data-key="${tagKey}">${translatedTag}</span>`;
             }).join(' ');
 
@@ -486,7 +475,9 @@
                     </div>
                     <button class="download-button"
                             data-key-text="downloadNow"
-                            data-title="${title}"  data-desc="${description}" data-img="${game.image}"
+                            data-title="${title}"
+                            data-desc="${description}"
+                            data-img="${game.image}"
                             data-url="${game.downloadUrl}">
                         <i class="fas fa-download"></i> <span>${translations[currentLanguage]['downloadNow']}</span>
                     </button>
@@ -495,44 +486,44 @@
             gamesGrid.appendChild(gameCard);
         });
 
-        // Update Load More Button
         if (itemsDisplayed >= filteredGames.length) {
             loadMoreBtn.classList.add('hidden');
         } else {
             loadMoreBtn.classList.remove('hidden');
+            // Ensure button text is translated correctly after potentially being hidden/shown
+             const loadMoreSpan = loadMoreBtn.querySelector('span');
+             if(loadMoreSpan) loadMoreSpan.textContent = translations[currentLanguage]['loadMoreBtn'];
+             else loadMoreBtn.textContent = translations[currentLanguage]['loadMoreBtn'];
         }
-
-        // Re-attach listeners to the newly added buttons
         setupDownloadButtonListeners();
     }
 
-    // --- Load Games from JSON ---
     async function loadGames() {
         loadingIndicator.style.display = 'block';
+        gamesGrid.innerHTML = ''; // Clear grid while loading
+        loadMoreBtn.classList.add('hidden'); // Hide load more while loading
         try {
-            const response = await fetch('games.json?v=' + Date.now()); // Add cache busting
+            const response = await fetch('games.json?v=' + Date.now());
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             allGames = await response.json();
-            filteredGames = [...allGames]; // Initialize filtered list
-            itemsDisplayed = itemsPerPage; // Show initial batch
-            populateFilters(allGames); // Populate dropdowns based on loaded games
-            renderGames(); // Initial render
+            filteredGames = [...allGames];
+            itemsDisplayed = itemsPerPage;
+            populateFilters(allGames);
+            renderGames();
         } catch (error) {
             console.error("Could not load games data:", error);
             loadingIndicator.style.display = 'none';
-             gamesGrid.innerHTML = `<p style="color: var(--danger-color); text-align: center;">${translations[currentLanguage]['errorLoadingGames'] || 'Failed to load games.'}</p>`;
+             gamesGrid.innerHTML = `<p style="color: var(--danger-color); text-align: center;" data-key="errorLoadingGames">${translations[currentLanguage]['errorLoadingGames'] || 'Failed to load games.'}</p>`;
              loadMoreBtn.classList.add('hidden');
         }
     }
 
-    // --- Timer/View Logic Functions (Mostly unchanged, ensure i18n integration) ---
-     function showTimerView(gameData) {
-         // Use translated title/desc from button data if possible
-         timerGameTitle.textContent = gameData.title || translations[currentLanguage]['siteTitle'] || 'Game';
+    function showTimerView(gameData) {
+         timerGameTitle.textContent = gameData.title || 'Game';
          timerGameDesc.textContent = gameData.desc || '';
          timerGameImg.src = gameData.img || 'placeholder-game-thumb.jpg';
-         const altKey = `${gameData.id}Alt` // Construct alt key if ID available
-         timerGameImg.alt = translations[currentLanguage][altKey] || `${translations[currentLanguage]['timerGameAlt'] || 'Image of'} ${gameData.title || 'Game'}`;
+         const altKey = `${gameData.id}Alt`
+         timerGameImg.alt = (translations[currentLanguage][altKey] || translations[currentLanguage]['timerGameAlt'] || 'Image of {gameName}').replace('{gameName}', gameData.title || 'Game');
          document.title = `${translations[currentLanguage]['timerPageTitle'] || 'Preparing Download...'} - ${gameData.title || ''}`;
 
          if (gameData.url && !gameData.url.startsWith('REPLACE_WITH') && gameData.url !== '#') {
@@ -548,8 +539,8 @@
              statusMessage.textContent = translations[currentLanguage]['statusPreparing'] || 'Preparing link...';
              statusMessage.style.color = 'var(--action-blue)';
              startCountdown(10, gameData.url, gameData);
-         } else { /* Error handling unchanged */
-              timerDisplay.textContent = 'X';
+         } else {
+             timerDisplay.textContent = 'X';
              statusMessage.textContent = translations[currentLanguage]['statusErrorNoLink'] || 'Error: Download link unavailable!';
              statusMessage.style.color = 'var(--danger-color)';
              downloadNoticeContainer.innerHTML = translations[currentLanguage]['statusErrorNoLink'] || 'Error: Download link unavailable!';
@@ -560,7 +551,7 @@
          setTimeout(() => timerView.classList.add('visible'), 10);
      }
 
-    function hideTimerView() { /* Unchanged */
+    function hideTimerView() {
         if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
         timerView.classList.remove('visible');
         setTimeout(() => {
@@ -569,7 +560,7 @@
             document.title = translations[currentLanguage]['siteTitle'] || 'Game Hub';
         }, 500);
     }
-    function startCountdown(duration, downloadUrl, gameData) { /* Unchanged, uses translated status message */
+    function startCountdown(duration, downloadUrl, gameData) {
          let timeLeft = duration;
          function updateTimerDisplay() {
              timerDisplay.textContent = timeLeft;
@@ -585,7 +576,7 @@
          updateTimerDisplay();
          countdownInterval = setInterval(updateTimerDisplay, 1000);
      }
-    function triggerDownload(url, gameData) { /* Unchanged, uses translated status/notice messages */
+    function triggerDownload(url, gameData) {
          if (url) {
              statusMessage.textContent = translations[currentLanguage]['statusStarting'] || 'Starting download...';
              realDownloadLink.click();
@@ -594,7 +585,7 @@
              const innerLink = downloadNoticeContainer.querySelector('a');
              if(innerLink) {
                   innerLink.style.color = 'var(--primary-blue)';
-                  const innerLinkKey = 'manualDownloadLinkAfterInner'; // Key is fixed here
+                  const innerLinkKey = 'manualDownloadLinkAfterInner';
                   if (translations[currentLanguage][innerLinkKey]) { innerLink.textContent = translations[currentLanguage][innerLinkKey]; }
              }
          } else {
@@ -603,12 +594,9 @@
          }
      }
 
-    // --- Event Listener Setup ---
-    function setupDownloadButtonListeners() {
-        // Detach old listeners might be needed if cards are complex, but simple re-querying works for now
-        document.querySelectorAll('.games-grid .download-button').forEach(button => {
-             // Clone/replace is safer if events bubble up complexly
-             const newButton = button.cloneNode(true);
+     function setupDownloadButtonListeners() {
+         document.querySelectorAll('.games-grid .download-button').forEach(button => {
+             const newButton = button.cloneNode(true); // Clone to remove old listeners safely
              button.parentNode.replaceChild(newButton, button);
 
              newButton.addEventListener('click', () => {
@@ -616,7 +604,7 @@
                      title: newButton.dataset.title, desc: newButton.dataset.desc,
                      img: newButton.dataset.img, url: newButton.dataset.url
                  };
-                 if (!gameData.url || gameData.url.startsWith('REPLACE_WITH') || gameData.url === '#') {
+                  if (!gameData.url || gameData.url.startsWith('REPLACE_WITH') || gameData.url === '#') {
                      alert(translations[currentLanguage]['alertLinkMissing'] || 'Link missing!');
                      return;
                  }
@@ -626,77 +614,28 @@
     }
 
     function setupEventListeners() {
-        // Filters
-        categoryFilterSelect.addEventListener('change', (e) => {
-            currentCategoryFilter = e.target.value;
-            itemsDisplayed = itemsPerPage; // Reset pagination
-            renderGames();
-        });
-        platformFilterSelect.addEventListener('change', (e) => {
-            currentPlatformFilter = e.target.value;
-            itemsDisplayed = itemsPerPage;
-            renderGames();
-        });
-        // Sorting
-        sortSelect.addEventListener('change', (e) => {
-            currentSort = e.target.value;
-            itemsDisplayed = itemsPerPage;
-            renderGames();
-        });
-        // Search
+        categoryFilterSelect.addEventListener('change', (e) => { currentCategoryFilter = e.target.value; itemsDisplayed = itemsPerPage; renderGames(); });
+        platformFilterSelect.addEventListener('change', (e) => { currentPlatformFilter = e.target.value; itemsDisplayed = itemsPerPage; renderGames(); });
+        sortSelect.addEventListener('change', (e) => { currentSort = e.target.value; itemsDisplayed = itemsPerPage; renderGames(); });
         searchInput.addEventListener('input', (e) => {
-             // Debounce search input slightly
-             clearTimeout(searchInput.timer);
-             searchInput.timer = setTimeout(() => {
+             clearTimeout(searchDebounceTimer);
+             searchDebounceTimer = setTimeout(() => {
                  currentSearchTerm = e.target.value.toLowerCase().trim();
                  itemsDisplayed = itemsPerPage;
                  renderGames();
-             }, 300); // Wait 300ms after user stops typing
+             }, 300);
         });
-
-        // Load More
-        loadMoreBtn.addEventListener('click', () => {
-            itemsDisplayed += itemsPerPage;
-            renderGames(); // Re-render with more items
-        });
-
-        // Language Switcher
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.dataset.lang;
-                if (lang !== currentLanguage) {
-                    translatePage(lang);
-                    // Note: translatePage now calls renderGames(true) if games are loaded
-                }
-            });
-        });
-
-        // Close Timer Button (needs to be accessible even if timer view is hidden)
-         if(closeTimerButton) {
-             closeTimerButton.addEventListener('click', hideTimerView);
-         } else {
-             console.error("Close timer button not found during initial setup.");
-         }
-
-        // Initial setup for download buttons will be done in displayGames after loading
+        loadMoreBtn.addEventListener('click', () => { itemsDisplayed += itemsPerPage; renderGames(); });
+        langButtons.forEach(btn => { btn.addEventListener('click', () => { const lang = btn.dataset.lang; if (lang !== currentLanguage) { translatePage(lang); } }); });
+        if(closeTimerButton) { closeTimerButton.addEventListener('click', hideTimerView); }
     }
 
-    // --- Initial Load ---
     document.addEventListener('DOMContentLoaded', () => {
         const detectedLang = detectLanguage();
-        currentLanguage = detectedLang; // Set initial language state
-        translatePage(detectedLang); // Translate static elements first
-        loadGames(); // Fetch data and render games (will trigger translation again inside if needed)
-        setupEventListeners(); // Setup listeners for filters, sort etc.
-
-        // Initial year update in footer
-         const year = new Date().getFullYear();
-         const footerRightsP = document.querySelector('p[data-key="footerRights"]');
-         if(footerRightsP && translations[currentLanguage]['footerRights']) {
-             footerRightsP.textContent = translations[currentLanguage]['footerRights'].replace('{year}', year);
-         } else if(yearSpan) {
-             yearSpan.textContent = year; // Fallback
-         }
+        currentLanguage = detectedLang;
+        translatePage(detectedLang);
+        loadGames();
+        setupEventListeners();
     });
 
     </script>
