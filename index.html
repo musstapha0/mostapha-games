@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="siteTitle">مركز الألعاب - تحميل أحدث الألعاب</title>
+    <meta name="description" content="اكتشف وحمل أحدث وأفضل الألعاب للكمبيوتر والموبايل. تحميلات آمنة ومباشرة." data-key="siteDescription">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* نفس متغيرات CSS والـ Reset من المثال السابق */
+        :root {
+             --dark-blue-bg: #0a192f; --medium-dark-blue: #1c2541; --primary-blue: #61dafb;
+             --action-blue: #00aaff; --text-light: #e0fbfc; --text-secondary: #a8b2d1;
+             --card-bg: #0f284a; --heading-font: 'Exo 2', sans-serif; --body-font: 'Open Sans', sans-serif;
+             --danger-color: #ff4d4f; /* لون للأخطاء */
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--body-font); line-height: 1.6; color: var(--text-light); background-color: var(--dark-blue-bg); }
+        .container { width: 90%; max-width: 1300px; margin: 0 auto; padding: 20px 0; }
+
+        /* --- Header --- */
+        .main-header { background-color: rgba(10, 25, 47, 0.85); padding: 10px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1300px; margin: 0 auto; flex-wrap: wrap; gap: 15px; }
+        .logo { font-family: var(--heading-font); font-size: 1.8em; color: var(--primary-blue); text-decoration: none; white-space: nowrap; }
+        .logo i { margin-inline-end: 8px; }
+        .header-controls { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .search-bar input[type="search"] { padding: 8px 15px; border-radius: 20px; border: 1px solid var(--medium-dark-blue); background-color: var(--card-bg); color: var(--text-light); min-width: 200px; transition: all 0.3s ease; }
+        .search-bar input[type="search"]::placeholder { color: var(--text-secondary); }
+        .search-bar input[type="search"]:focus { outline: none; border-color: var(--primary-blue); background-color: var(--dark-blue-bg); }
+        .lang-switcher button { background: none; border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 5px 10px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s, color 0.3s; margin-inline-start: 5px;}
+        .lang-switcher button.active { background-color: var(--primary-blue); color: var(--dark-blue-bg); font-weight: bold;}
+
+        /* --- Filters & Sorting --- */
+        .controls-section { background-color: var(--medium-dark-blue); padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center;}
+        .filter-group, .sort-group { display: flex; flex-wrap: wrap; align-items: center; gap: 10px;}
+        .filter-group label, .sort-group label { margin-inline-end: 8px; font-weight: 600; white-space: nowrap;}
+        .filter-group select, .sort-group select {
+            background-color: var(--card-bg); color: var(--text-light); border: 1px solid var(--primary-blue);
+            border-radius: 5px; padding: 8px 12px; cursor: pointer; min-width: 150px;
+        }
+        .filter-group select:focus, .sort-group select:focus { outline: none; box-shadow: 0 0 5px var(--primary-blue); }
+
+        /* --- Game Grid (No significant changes needed from previous) --- */
+        .games-grid-section h2 { font-family: var(--heading-font); font-size: 2em; color: var(--primary-blue); text-align: center; margin-bottom: 40px; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .game-card { background-color: var(--card-bg); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
+        .game-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 170, 255, 0.1); }
+        .game-thumbnail img { width: 100%; height: 180px; object-fit: cover; display: block; background-color: var(--medium-dark-blue); }
+        .game-info { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .game-info h3 { font-family: var(--heading-font); font-size: 1.3em; color: var(--text-light); margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .game-info p { font-size: 0.9em; color: var(--text-secondary); margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; min-height: calc(1.6 * 0.9em * 3); }
+        .game-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 5px;}
+        .game-tags span { background-color: var(--medium-dark-blue); color: var(--primary-blue); font-size: 0.75em; padding: 3px 8px; border-radius: 10px; margin-inline-end: 5px; display: inline-block; margin-bottom: 3px;}
+        .platform-icons i { font-size: 1.1em; color: var(--text-secondary); margin-inline-start: 6px;}
+        .download-button { display: block; background-color: var(--action-blue); color: #ffffff; text-align: center; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: background-color 0.3s ease, transform 0.2s ease; margin-top: auto; cursor: pointer; border: none; }
+        .download-button i { margin-inline-end: 8px; }
+        .download-button:hover { background-color: #0088cc; transform: scale(1.03); }
+
+        /* --- Load More Button --- */
+        .load-more-container { text-align: center; margin-top: 40px; }
+        .load-more-btn { background-color: var(--action-blue); color: white; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: 600; transition: background-color 0.3s ease; }
+        .load-more-btn:hover { background-color: #0088cc; }
+        .load-more-btn:disabled { background-color: var(--text-secondary); cursor: not-allowed; }
+        .load-more-btn.hidden { display: none; } /* لإخفاء الزر */
+
+
+        /* --- Timer View (No significant changes needed from previous) --- */
+        #timer-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 25, 47, 0.95); z-index: 2000; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.5s ease; }
+        #timer-view.visible { opacity: 1; display: flex !important; /* Override initial display:none */ }
+        .download-container { background-color: var(--card-bg); padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); text-align: center; max-width: 700px; width: 100%; position: relative; }
+        .close-timer-btn { position: absolute; top: 15px; inset-inline-start: 15px; font-size: 1.5em; color: var(--text-secondary); cursor: pointer; transition: color 0.3s ease; background: none; border: none; padding: 0; }
+        .close-timer-btn:hover { color: var(--primary-blue); }
+        .timer-game-thumbnail { width: 150px; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; border: 2px solid var(--medium-dark-blue); background-color: var(--medium-dark-blue); }
+        .timer-game-title { font-family: var(--heading-font); font-size: 2em; color: var(--primary-blue); margin-bottom: 15px; }
+        .timer-game-description { color: var(--text-secondary); margin-bottom: 30px; font-size: 1em; max-height: 100px; overflow-y: auto; padding-inline-end: 10px; }
+        .timer-game-description::-webkit-scrollbar { width: 5px; } .timer-game-description::-webkit-scrollbar-track { background: var(--medium-dark-blue); border-radius: 10px;} .timer-game-description::-webkit-scrollbar-thumb { background-color: var(--primary-blue); border-radius: 10px; }
+        .timer-container { margin-bottom: 25px; } .timer-text { font-size: 1.2em; color: var(--text-secondary); margin-bottom: 15px; } .timer-display { font-family: var(--heading-font); font-size: 4em; color: var(--primary-blue); font-weight: bold; line-height: 1; }
+        .status-message { font-size: 1em; color: var(--action-blue); min-height: 1.5em; margin-top: 20px; } .download-notice { font-size: 0.85em; color: var(--text-secondary); margin-top: 30px; } .download-notice a { color: var(--primary-blue); }
+        #real-download-link { display: none; }
+
+        /* --- Footer (No significant changes) --- */
+        .main-footer { background-color: var(--medium-dark-blue); color: var(--text-secondary); text-align: center; padding: 25px 0; margin-top: 50px; border-top: 3px solid var(--primary-blue); }
+        .footer-content p { margin-bottom: 10px; } .footer-content a { color: var(--primary-blue); text-decoration: none; margin: 0 10px; } .footer-content a:hover { text-decoration: underline; }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+             .games-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+             .controls-section { flex-direction: column; align-items: stretch; gap: 15px;}
+             .filter-group, .sort-group { justify-content: space-between;}
+             .filter-group select, .sort-group select { flex-grow: 1; }
+        }
+         @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 10px;}
+            .search-bar input[type="search"] { width: 100%; }
+            .featured-section h2 { font-size: 2em; }
+            .timer-game-title {font-size: 1.5em;} .timer-display {font-size: 3em;} .download-container {padding: 30px 20px;}
+        }
+         @media (max-width: 480px) {
+            .games-grid { grid-template-columns: 1fr; } .logo { font-size: 1.5em; } .timer-game-thumbnail {width: 100px; height: 100px;}
+         }
+
+        /* Helper class for loading state */
+        .loading::after { content: '...'; display: inline-block; animation: dots 1s steps(3, end) infinite; }
+        @keyframes dots { 0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0);} 40% { color: var(--text-light); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0);} 60% { text-shadow: .25em 0 0 var(--text-light), .5em 0 0 rgba(0,0,0,0);} 80%, 100% { text-shadow: .25em 0 0 var(--text-light), .5em 0 0 var(--text-light);}}
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="#" class="logo" data-key="siteLogo"><i class="fas fa-gamepad"></i> مركز الألعاب</a>
+            <div class="header-controls">
+                 <div class="search-bar">
+                    <input type="search" id="search-input" data-key="searchPlaceholder" placeholder="ابحث عن لعبة...">
+                 </div>
+                 <div class="lang-switcher">
+                     <button id="lang-ar" data-lang="ar">العربية</button>
+                     <button id="lang-en" data-lang="en">English</button>
+                 </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="main-view">
+            <div class="container">
+                <section class="controls-section">
+                    <div class="filter-group">
+                        <label for="category-filter" data-key="filterCategoryLabel">الفئة:</label>
+                        <select id="category-filter">
+                            <option value="all" data-key="filterAllCategories">جميع الفئات</option>
+                            </select>
+                    </div>
+                    <div class="filter-group">
+                         <label for="platform-filter" data-key="filterPlatformLabel">المنصة:</label>
+                         <select id="platform-filter">
+                            <option value="all" data-key="filterAllPlatforms">جميع المنصات</option>
+                            </select>
+                    </div>
+                    <div class="sort-group">
+                        <label for="sort-select" data-key="sortLabel">فرز حسب:</label>
+                        <select id="sort-select">
+                            <option value="default" data-key="sortDefault">الافتراضي</option>
+                            <option value="newest" data-key="sortNewest">الأحدث</option>
+                            <option value="popularity" data-key="sortPopularity">الأكثر شعبية</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="games-grid-section">
+                    <h2 data-key="allGamesTitle">جميع الألعاب</h2>
+                    <div class="games-grid" id="games-grid-container">
+                        <p id="loading-indicator" data-key="loadingGames" class="loading">جاري تحميل الألعاب...</p>
+                    </div>
+                    <div class="load-more-container">
+                         <button id="load-more-btn" class="load-more-btn hidden" data-key="loadMoreBtn">تحميل المزيد</button>
+                    </div>
+                </section>
+
+            </div>
+        </div> <div id="timer-view">
+            <div class="download-container">
+                <button class="close-timer-btn" data-key-title="closeButtonTitle" title="إغلاق" aria-label="Close Download Panel"><i class="fas fa-times"></i></button>
+                <img id="timer-game-img" src="placeholder-game-thumb.jpg" alt="Game Thumbnail" data-key-alt="timerGameAlt" class="timer-game-thumbnail">
+                <h1 id="timer-game-title" class="timer-game-title">اسم اللعبة</h1>
+                <p id="timer-game-desc" class="timer-game-description">وصف اللعبة سيظهر هنا...</p>
+                <div class="timer-container">
+                    <p class="timer-text" data-key="timerText">سيبدأ التحميل خلال:</p>
+                    <div id="timer-display" class="timer-display">10</div>
+                </div>
+                <p id="status-message" class="status-message" data-key="statusPreparing">جاري تحضير الرابط...</p>
+                <p class="download-notice" data-key="downloadNoticeContainer">
+                    </p>
+            </div>
+            <a id="real-download-link" href="#" download></a>
+        </div> </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p data-key="footerRights">جميع الحقوق محفوظة &copy; <span id="year">{year}</span> مركز الألعاب</p>
+            <p>
+                <a href="#" data-key="privacyPolicy">سياسة الخصوصية</a> |
+                <a href="#" data-key="termsOfUse">شروط الاستخدام</a> |
+                <a href="#" data-key="contactUs">اتصل بنا</a>
+            </p>
+             <p style="font-size: 0.8em; margin-top: 15px;" data-key="legalDisclaimer">تنويه: تأكد من أن لديك التراخيص اللازمة لتوزيع الألعاب المدرجة.</p>
+        </div>
+    </footer>
+
+    <script>
+    // --- Translations Object ---
+    const translations = {
+        'ar': {
+            'siteTitle': 'مركز الألعاب - تحميل أحدث الألعاب', 'siteDescription': 'اكتشف وحمل أحدث وأفضل الألعاب للكمبيوتر والموبايل. تحميلات آمنة ومباشرة.',
+            'siteLogo': '<i class="fas fa-gamepad"></i> مركز الألعاب', 'searchPlaceholder': 'ابحث عن لعبة...',
+            'featuredTitle': 'ألعاب مميزة هذا الأسبوع', 'featuredDesc': 'اكتشف أحدث الإضافات وأكثر الألعاب شعبية التي ننصحك بتجربتها الآن. تحميلات سريعة وموثوقة.',
+            'allGamesTitle': 'جميع الألعاب', 'downloadNow': 'تحميل الآن',
+            'filterCategoryLabel': 'الفئة:', 'filterAllCategories': 'جميع الفئات', 'filterPlatformLabel': 'المنصة:', 'filterAllPlatforms': 'جميع المنصات',
+            'sortLabel': 'فرز حسب:', 'sortDefault': 'الافتراضي', 'sortNewest': 'الأحدث', 'sortPopularity': 'الأكثر شعبية',
+            'loadingGames': 'جاري تحميل الألعاب...', 'loadMoreBtn': 'تحميل المزيد', 'errorLoadingGames': 'فشل تحميل بيانات الألعاب.',
+            'tagAction': 'أكشن', 'tagAdventure': 'مغامرات', 'tagStrategy': 'استراتيجية', 'tagPuzzle': 'ألغاز', 'tagBuilding': 'بناء', 'tagSpace': 'فضاء', 'tagLogic': 'منطق', /* Add more tags */
+            'platformPc': 'PC', 'platformAndroid': 'Android', 'platformIos': 'iOS', /* Add more platforms */
+            'gameImageAlt': 'غلاف لعبة {gameName}', // {gameName} will be replaced
+            'timerPageTitle': 'جاري تحضير التحميل...', 'timerGameAlt': 'صورة مصغرة للعبة', 'timerText': 'سيبدأ التحميل خلال:',
+            'statusPreparing': 'جاري تحضير الرابط...', 'statusCountdown': 'سيتم تحويلك للتحميل خلال {timeLeft} ثانية...', 'statusStarting': 'بدء التحميل...',
+            'statusErrorNoLink': 'خطأ: رابط التحميل غير متوفر!', 'statusErrorNoStart': 'خطأ: لا يمكن بدء التحميل بدون رابط صالح.',
+            'downloadNotice': 'إذا لم يبدأ التحميل تلقائيًا، <a id="manual-download-link" href="#" style="color: var(--primary-blue);" data-key-link="manualDownloadLinkInner">انقر هنا</a>.<br><small>(تأكد من تعطيل مانع الإعلانات إذا واجهت مشكلة)</small>',
+            'manualDownloadLinkInner': 'انقر هنا',
+            'manualDownloadLinkAfter': 'إذا لم يبدأ التحميل، <a href="{url}" style="color: var(--primary-blue);" data-key-link="manualDownloadLinkAfterInner">حاول النقر هنا مرة أخرى</a>.',
+            'manualDownloadLinkAfterInner': 'حاول النقر هنا مرة أخرى',
+            'closeButtonTitle': 'إغلاق',
+            'footerRights': 'جميع الحقوق محفوظة © {year} مركز الألعاب', 'privacyPolicy': 'سياسة الخصوصية', 'termsOfUse': 'شروط الاستخدام', 'contactUs': 'اتصل بنا',
+            'legalDisclaimer': 'تنويه: تأكد من أن لديك التراخيص اللازمة لتوزيع الألعاب المدرجة.',
+            'alertLinkMissing': 'عذراً، رابط التحميل غير محدد لهذه اللعبة.',
+        },
+        'en': {
+             'siteTitle': 'Game Hub - Download Latest Games', 'siteDescription': 'Discover and download the latest and best games for PC and mobile. Safe and direct downloads.',
+             'siteLogo': '<i class="fas fa-gamepad"></i> Game Hub', 'searchPlaceholder': 'Search for a game...',
+             'featuredTitle': 'Featured Games This Week', 'featuredDesc': 'Discover the latest additions and most popular games we recommend you try now. Fast and reliable downloads.',
+             'allGamesTitle': 'All Games', 'downloadNow': 'Download Now',
+             'filterCategoryLabel': 'Category:', 'filterAllCategories': 'All Categories', 'filterPlatformLabel': 'Platform:', 'filterAllPlatforms': 'All Platforms',
+             'sortLabel': 'Sort by:', 'sortDefault': 'Default', 'sortNewest': 'Newest', 'sortPopularity': 'Most Popular',
+             'loadingGames': 'Loading games...', 'loadMoreBtn': 'Load More', 'errorLoadingGames': 'Failed to load games data.',
+             'tagAction': 'Action', 'tagAdventure': 'Adventure', 'tagStrategy': 'Strategy', 'tagPuzzle': 'Puzzle', 'tagBuilding': 'Building', 'tagSpace': 'Space', 'tagLogic': 'Logic', /* Add more tags */
+             'platformPc': 'PC', 'platformAndroid': 'Android', 'platformIos': 'iOS', /* Add more platforms */
+             'gameImageAlt': '{gameName} Cover', // {gameName} will be replaced
+             'timerPageTitle': 'Preparing Download...', 'timerGameAlt': 'Game Thumbnail', 'timerText': 'Your download will begin in:',
+             'statusPreparing': 'Preparing link...', 'statusCountdown': 'Redirecting to download in {timeLeft} seconds...', 'statusStarting': 'Starting download...',
+             'statusErrorNoLink': 'Error: Download link is not available!', 'statusErrorNoStart': 'Error: Cannot start download without a valid link.',
+             'downloadNotice': 'If the download doesn\'t start automatically, <a id="manual-download-link" href="#" style="color: var(--primary-blue);" data-key-link="manualDownloadLinkInner">click here</a>.<br><small>(Make sure to disable ad-blockers if you encounter issues)</small>',
+             'manualDownloadLinkInner': 'click here',
+             'manualDownloadLinkAfter': 'If download doesn\'t start, <a href="{url}" style="color: var(--primary-blue);" data-key-link="manualDownloadLinkAfterInner">try clicking here again</a>.',
+             'manualDownloadLinkAfterInner': 'try clicking here again',
+             'closeButtonTitle': 'Close',
+             'footerRights': 'All rights reserved © {year} Game Hub', 'privacyPolicy': 'Privacy Policy', 'termsOfUse': 'Terms of Use', 'contactUs': 'Contact Us',
+             'legalDisclaimer': 'Notice: Ensure you have the necessary licenses to distribute the listed games.',
+             'alertLinkMissing': 'Sorry, the download link for this game is not specified.',
+        }
+    };
+
+    // --- Global State & Config ---
+    let currentLanguage = 'ar'; // Default, will be updated
+    let allGames = []; // To store all games fetched from JSON
+    let filteredGames = []; // To store games after filtering/sorting
+    let itemsPerPage = 6; // Number of games to show initially and per "Load More" click
+    let itemsDisplayed = 0;
+    let currentSort = 'default';
+    let currentCategoryFilter = 'all';
+    let currentPlatformFilter = 'all';
+    let currentSearchTerm = '';
+    let countdownInterval = null;
+
+    // --- DOM Elements ---
+    const mainView = document.getElementById('main-view');
+    const timerView = document.getElementById('timer-view');
+    const closeTimerButton = timerView.querySelector('.close-timer-btn');
+    const timerGameImg = document.getElementById('timer-game-img');
+    const timerGameTitle = document.getElementById('timer-game-title');
+    const timerGameDesc = document.getElementById('timer-game-desc');
+    const timerDisplay = document.getElementById('timer-display');
+    const statusMessage = document.getElementById('status-message');
+    const realDownloadLink = document.getElementById('real-download-link');
+    const downloadNoticeContainer = timerView.querySelector('.download-notice');
+    const yearSpan = document.getElementById('year');
+    const gamesGrid = document.getElementById('games-grid-container');
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const categoryFilterSelect = document.getElementById('category-filter');
+    const platformFilterSelect = document.getElementById('platform-filter');
+    const sortSelect = document.getElementById('sort-select');
+    const searchInput = document.getElementById('search-input');
+    const langBtnAr = document.getElementById('lang-ar');
+    const langBtnEn = document.getElementById('lang-en');
+    const langButtons = [langBtnAr, langBtnEn]; // Array for easier handling
+
+    // --- Platform Icons Mapping ---
+    const platformIcons = {
+        pc: '<i class="fab fa-windows" title="PC"></i>',
+        android: '<i class="fab fa-android" title="Android"></i>',
+        ios: '<i class="fab fa-apple" title="iOS"></i>',
+        // Add more platforms and icons
+    };
+
+    // --- Translation Function ---
+    function translatePage(lang) {
+        if (!translations[lang]) { lang = 'ar'; }
+        currentLanguage = lang;
+        localStorage.setItem('preferredLang', lang); // Save preference
+        const dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        document.documentElement.lang = lang;
+        document.documentElement.dir = dir;
+        document.body.style.direction = dir;
+
+        // Update language switcher buttons state
+        langButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+
+        // Update static text using data-key
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.dataset.key;
+            const translation = translations[lang][key];
+            if (translation !== undefined) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                     if(el.type === 'search' || el.type === 'text') el.placeholder = translation;
+                } else if (['siteLogo'].includes(key)) el.innerHTML = translation;
+                 else el.textContent = translation;
+            } else { console.warn(`Missing translation key: ${key} for lang: ${lang}`); }
+        });
+        // Update button text (inside spans)
+         document.querySelectorAll('button[data-key-text] span, a[data-key-text] span').forEach(el => {
+             const key = el.parentElement.dataset.keyText;
+             if(el.parentElement.classList.contains('download-button')){ // Only update download buttons here
+                 const translation = translations[lang][key];
+                if (translation !== undefined) el.textContent = translation;
+                else console.warn(`Missing translation key (text): ${key} for lang: ${lang}`);
+             } else { // Update other buttons like load more
+                 const translation = translations[lang][key];
+                if (translation !== undefined) el.parentElement.textContent = translation; // Update button directly if no span
+                else console.warn(`Missing translation key (text): ${key} for lang: ${lang}`);
+             }
+        });
+        // Update title attributes
+        document.querySelectorAll('[data-key-title]').forEach(el => {
+             const key = el.dataset.keyTitle;
+             if (translations[lang][key] !== undefined) el.title = translations[lang][key];
+        });
+         // Update alt attributes (Note: Game specific alts are handled during render)
+         document.querySelectorAll('img[data-key-alt]:not(.game-card img)').forEach(el => { // Exclude game card images
+             const key = el.dataset.keyAlt;
+             if (translations[lang][key] !== undefined) el.alt = translations[lang][key];
+         });
+        // Update page title, meta description
+        if(translations[lang]['siteTitle']) document.title = translations[lang]['siteTitle'];
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if(metaDesc && translations[lang]['siteDescription']) metaDesc.content = translations[lang]['siteDescription'];
+        // Update footer year text
+        const year = new Date().getFullYear();
+        const footerRightsP = document.querySelector('p[data-key="footerRights"]');
+        if(footerRightsP && translations[lang]['footerRights']) footerRightsP.textContent = translations[lang]['footerRights'].replace('{year}', year);
+        // Update dynamic link inner text if needed
+        document.querySelectorAll('a[data-key-link]').forEach(el => {
+             const key = el.dataset.keyLink;
+             if (translations[lang][key]) { el.textContent = translations[lang][key]; }
+        });
+         // Update options in select elements
+        document.querySelectorAll('select option[data-key]').forEach(el => {
+             const key = el.dataset.key;
+             if (translations[lang][key]) { el.textContent = translations[lang][key]; }
+         });
+
+         // Re-render games if the list is already loaded, to apply translated titles/desc
+         if (allGames.length > 0) {
+             renderGames(true); // Pass true to indicate it's just a re-render after translation
+         }
+    }
+
+    // --- Language Detection (Checks localStorage first) ---
+    function detectLanguage() {
+        const savedLang = localStorage.getItem('preferredLang');
+        if (savedLang && translations[savedLang]) {
+            return savedLang;
+        }
+        const preferredLanguages = navigator.languages || [navigator.language || navigator.userLanguage];
+        for (let lang of preferredLanguages) {
+            const langCode = lang.split('-')[0];
+            if (translations[langCode]) { return langCode; }
+        }
+        return 'ar'; // Default
+    }
+
+    // --- Populate Filter Options ---
+    function populateFilters(games) {
+        const categories = new Set();
+        const platforms = new Set();
+        games.forEach(game => {
+            if (game.category) categories.add(game.category);
+            if (game.platforms) game.platforms.forEach(p => platforms.add(p));
+        });
+
+        // Populate Categories
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            const categoryKey = `category${category.charAt(0).toUpperCase() + category.slice(1)}`; // e.g., categoryAction
+            option.dataset.key = categoryKey; // Add key for translation
+             option.textContent = translations[currentLanguage][categoryKey] || category; // Set initial text
+            categoryFilterSelect.appendChild(option);
+             // Add translation for the category key if missing
+             if (!translations['ar'][categoryKey]) translations['ar'][categoryKey] = category; // Use original as fallback
+             if (!translations['en'][categoryKey]) translations['en'][categoryKey] = category;
+        });
+
+        // Populate Platforms
+        platforms.forEach(platform => {
+             const option = document.createElement('option');
+             option.value = platform;
+             const platformKey = `platform${platform.charAt(0).toUpperCase() + platform.slice(1)}`; // e.g., platformPc
+             option.dataset.key = platformKey; // Add key for translation
+             option.textContent = translations[currentLanguage][platformKey] || platform; // Set initial text
+             platformFilterSelect.appendChild(option);
+              // Add translation for the platform key if missing
+             if (!translations['ar'][platformKey]) translations['ar'][platformKey] = platform;
+             if (!translations['en'][platformKey]) translations['en'][platformKey] = platform;
+        });
+    }
+
+    // --- Game Filtering, Sorting, Rendering ---
+    function applyFiltersAndSort() {
+         filteredGames = allGames.filter(game => {
+            const categoryMatch = currentCategoryFilter === 'all' || game.category?.toLowerCase() === currentCategoryFilter;
+            const platformMatch = currentPlatformFilter === 'all' || game.platforms?.includes(currentPlatformFilter);
+            const searchMatch = currentSearchTerm === '' ||
+                                (game.title[currentLanguage] || game.title['en'])?.toLowerCase().includes(currentSearchTerm) ||
+                                (game.description[currentLanguage] || game.description['en'])?.toLowerCase().includes(currentSearchTerm);
+            return categoryMatch && platformMatch && searchMatch;
+        });
+
+        // Apply Sorting
+        switch (currentSort) {
+            case 'newest':
+                filteredGames.sort((a, b) => new Date(b.releaseDate || 0) - new Date(a.releaseDate || 0));
+                break;
+            case 'popularity':
+                filteredGames.sort((a, b) => (b.popularityScore || 0) - (a.popularityScore || 0));
+                break;
+            case 'default': // Or alphabetical, or leave as is from JSON
+                 filteredGames.sort((a, b) => (a.title[currentLanguage] || a.title['en']).localeCompare(b.title[currentLanguage] || b.title['en']));
+                break;
+        }
+    }
+
+    function renderGames(isRerender = false) {
+        if (!isRerender) { // Only filter and sort if it's not just a language change re-render
+            applyFiltersAndSort();
+        }
+        // For re-render, filteredGames should already hold the correctly sorted/filtered list
+
+        loadingIndicator.style.display = 'none'; // Hide loading indicator
+        const gamesToShow = filteredGames.slice(0, itemsDisplayed);
+        gamesGrid.innerHTML = ''; // Clear previous games
+
+        if (gamesToShow.length === 0 && !isRerender) { // Show 'no results' only if not a re-render
+             gamesGrid.innerHTML = `<p style="color: var(--text-secondary); text-align: center;">${translations[currentLanguage]['noGamesFound'] || 'No games found matching your criteria.'}</p>`; // Add key 'noGamesFound'
+             loadMoreBtn.classList.add('hidden');
+             return; // Exit early
+        }
+
+
+        gamesToShow.forEach(game => {
+            const gameCard = document.createElement('article');
+            gameCard.className = 'game-card';
+
+            const title = game.title[currentLanguage] || game.title['en'];
+            const description = game.description[currentLanguage] || game.description['en'];
+            const altTextKey = `${game.id}Alt`; // Use game ID for unique alt text key
+            const altText = translations[currentLanguage][altTextKey] || (translations['en'][altTextKey] ? translations['en'][altTextKey].replace('{gameName}', title) : `${title} Cover`);
+
+
+            const tagsHTML = game.tags.map(tag => {
+                const tagKey = `tag${tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase()}`;
+                const translatedTag = translations[currentLanguage][tagKey] || tag;
+                return `<span data-key="${tagKey}">${translatedTag}</span>`;
+            }).join(' ');
+
+            const platformHTML = game.platforms.map(p => platformIcons[p.toLowerCase()] || '').join(' ');
+
+            gameCard.innerHTML = `
+                <div class="game-thumbnail">
+                    <img src="${game.image}" alt="${altText}" data-key-alt="${altTextKey}">
+                </div>
+                <div class="game-info">
+                    <div>
+                        <h3>${title}</h3>
+                        <p>${description}</p>
+                        <div class="game-meta">
+                             <div class="game-tags">${tagsHTML}</div>
+                             <div class="platform-icons">${platformHTML}</div>
+                        </div>
+                    </div>
+                    <button class="download-button"
+                            data-key-text="downloadNow"
+                            data-title="${title}"  data-desc="${description}" data-img="${game.image}"
+                            data-url="${game.downloadUrl}">
+                        <i class="fas fa-download"></i> <span>${translations[currentLanguage]['downloadNow']}</span>
+                    </button>
+                </div>
+            `;
+            gamesGrid.appendChild(gameCard);
+        });
+
+        // Update Load More Button
+        if (itemsDisplayed >= filteredGames.length) {
+            loadMoreBtn.classList.add('hidden');
+        } else {
+            loadMoreBtn.classList.remove('hidden');
+        }
+
+        // Re-attach listeners to the newly added buttons
+        setupDownloadButtonListeners();
+    }
+
+    // --- Load Games from JSON ---
+    async function loadGames() {
+        loadingIndicator.style.display = 'block';
+        try {
+            const response = await fetch('games.json?v=' + Date.now()); // Add cache busting
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            allGames = await response.json();
+            filteredGames = [...allGames]; // Initialize filtered list
+            itemsDisplayed = itemsPerPage; // Show initial batch
+            populateFilters(allGames); // Populate dropdowns based on loaded games
+            renderGames(); // Initial render
+        } catch (error) {
+            console.error("Could not load games data:", error);
+            loadingIndicator.style.display = 'none';
+             gamesGrid.innerHTML = `<p style="color: var(--danger-color); text-align: center;">${translations[currentLanguage]['errorLoadingGames'] || 'Failed to load games.'}</p>`;
+             loadMoreBtn.classList.add('hidden');
+        }
+    }
+
+    // --- Timer/View Logic Functions (Mostly unchanged, ensure i18n integration) ---
+     function showTimerView(gameData) {
+         // Use translated title/desc from button data if possible
+         timerGameTitle.textContent = gameData.title || translations[currentLanguage]['siteTitle'] || 'Game';
+         timerGameDesc.textContent = gameData.desc || '';
+         timerGameImg.src = gameData.img || 'placeholder-game-thumb.jpg';
+         const altKey = `${gameData.id}Alt` // Construct alt key if ID available
+         timerGameImg.alt = translations[currentLanguage][altKey] || `${translations[currentLanguage]['timerGameAlt'] || 'Image of'} ${gameData.title || 'Game'}`;
+         document.title = `${translations[currentLanguage]['timerPageTitle'] || 'Preparing Download...'} - ${gameData.title || ''}`;
+
+         if (gameData.url && !gameData.url.startsWith('REPLACE_WITH') && gameData.url !== '#') {
+             realDownloadLink.href = gameData.url;
+             realDownloadLink.setAttribute('download', (gameData.title || 'game') + '.zip');
+             downloadNoticeContainer.innerHTML = translations[currentLanguage]['downloadNotice'];
+             const innerLink = downloadNoticeContainer.querySelector('a[data-key-link]');
+              if(innerLink) {
+                 const key = innerLink.dataset.keyLink;
+                 if(translations[currentLanguage][key]) innerLink.textContent = translations[currentLanguage][key];
+                 innerLink.href = gameData.url;
+             }
+             statusMessage.textContent = translations[currentLanguage]['statusPreparing'] || 'Preparing link...';
+             statusMessage.style.color = 'var(--action-blue)';
+             startCountdown(10, gameData.url, gameData);
+         } else { /* Error handling unchanged */
+              timerDisplay.textContent = 'X';
+             statusMessage.textContent = translations[currentLanguage]['statusErrorNoLink'] || 'Error: Download link unavailable!';
+             statusMessage.style.color = 'var(--danger-color)';
+             downloadNoticeContainer.innerHTML = translations[currentLanguage]['statusErrorNoLink'] || 'Error: Download link unavailable!';
+              if(countdownInterval) clearInterval(countdownInterval);
+         }
+         mainView.style.display = 'none';
+         timerView.style.display = 'flex';
+         setTimeout(() => timerView.classList.add('visible'), 10);
+     }
+
+    function hideTimerView() { /* Unchanged */
+        if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+        timerView.classList.remove('visible');
+        setTimeout(() => {
+            timerView.style.display = 'none';
+            mainView.style.display = 'block';
+            document.title = translations[currentLanguage]['siteTitle'] || 'Game Hub';
+        }, 500);
+    }
+    function startCountdown(duration, downloadUrl, gameData) { /* Unchanged, uses translated status message */
+         let timeLeft = duration;
+         function updateTimerDisplay() {
+             timerDisplay.textContent = timeLeft;
+             if (timeLeft <= 0) {
+                 clearInterval(countdownInterval); countdownInterval = null;
+                 triggerDownload(downloadUrl, gameData);
+             } else {
+                 statusMessage.textContent = (translations[currentLanguage]['statusCountdown'] || 'Redirecting in {timeLeft} seconds...').replace('{timeLeft}', timeLeft);
+                 timeLeft--;
+             }
+         }
+         if (countdownInterval) clearInterval(countdownInterval);
+         updateTimerDisplay();
+         countdownInterval = setInterval(updateTimerDisplay, 1000);
+     }
+    function triggerDownload(url, gameData) { /* Unchanged, uses translated status/notice messages */
+         if (url) {
+             statusMessage.textContent = translations[currentLanguage]['statusStarting'] || 'Starting download...';
+             realDownloadLink.click();
+             downloadNoticeContainer.innerHTML = (translations[currentLanguage]['manualDownloadLinkAfter'] || 'If download doesnt start, <a href="{url}">click here</a>.')
+                                                     .replace('{url}', url);
+             const innerLink = downloadNoticeContainer.querySelector('a');
+             if(innerLink) {
+                  innerLink.style.color = 'var(--primary-blue)';
+                  const innerLinkKey = 'manualDownloadLinkAfterInner'; // Key is fixed here
+                  if (translations[currentLanguage][innerLinkKey]) { innerLink.textContent = translations[currentLanguage][innerLinkKey]; }
+             }
+         } else {
+             statusMessage.textContent = translations[currentLanguage]['statusErrorNoStart'] || 'Error: Cannot start download.';
+             statusMessage.style.color = 'var(--danger-color)';
+         }
+     }
+
+    // --- Event Listener Setup ---
+    function setupDownloadButtonListeners() {
+        // Detach old listeners might be needed if cards are complex, but simple re-querying works for now
+        document.querySelectorAll('.games-grid .download-button').forEach(button => {
+             // Clone/replace is safer if events bubble up complexly
+             const newButton = button.cloneNode(true);
+             button.parentNode.replaceChild(newButton, button);
+
+             newButton.addEventListener('click', () => {
+                 const gameData = {
+                     title: newButton.dataset.title, desc: newButton.dataset.desc,
+                     img: newButton.dataset.img, url: newButton.dataset.url
+                 };
+                 if (!gameData.url || gameData.url.startsWith('REPLACE_WITH') || gameData.url === '#') {
+                     alert(translations[currentLanguage]['alertLinkMissing'] || 'Link missing!');
+                     return;
+                 }
+                 showTimerView(gameData);
+             });
+         });
+    }
+
+    function setupEventListeners() {
+        // Filters
+        categoryFilterSelect.addEventListener('change', (e) => {
+            currentCategoryFilter = e.target.value;
+            itemsDisplayed = itemsPerPage; // Reset pagination
+            renderGames();
+        });
+        platformFilterSelect.addEventListener('change', (e) => {
+            currentPlatformFilter = e.target.value;
+            itemsDisplayed = itemsPerPage;
+            renderGames();
+        });
+        // Sorting
+        sortSelect.addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            itemsDisplayed = itemsPerPage;
+            renderGames();
+        });
+        // Search
+        searchInput.addEventListener('input', (e) => {
+             // Debounce search input slightly
+             clearTimeout(searchInput.timer);
+             searchInput.timer = setTimeout(() => {
+                 currentSearchTerm = e.target.value.toLowerCase().trim();
+                 itemsDisplayed = itemsPerPage;
+                 renderGames();
+             }, 300); // Wait 300ms after user stops typing
+        });
+
+        // Load More
+        loadMoreBtn.addEventListener('click', () => {
+            itemsDisplayed += itemsPerPage;
+            renderGames(); // Re-render with more items
+        });
+
+        // Language Switcher
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                if (lang !== currentLanguage) {
+                    translatePage(lang);
+                    // Note: translatePage now calls renderGames(true) if games are loaded
+                }
+            });
+        });
+
+        // Close Timer Button (needs to be accessible even if timer view is hidden)
+         if(closeTimerButton) {
+             closeTimerButton.addEventListener('click', hideTimerView);
+         } else {
+             console.error("Close timer button not found during initial setup.");
+         }
+
+        // Initial setup for download buttons will be done in displayGames after loading
+    }
+
+    // --- Initial Load ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const detectedLang = detectLanguage();
+        currentLanguage = detectedLang; // Set initial language state
+        translatePage(detectedLang); // Translate static elements first
+        loadGames(); // Fetch data and render games (will trigger translation again inside if needed)
+        setupEventListeners(); // Setup listeners for filters, sort etc.
+
+        // Initial year update in footer
+         const year = new Date().getFullYear();
+         const footerRightsP = document.querySelector('p[data-key="footerRights"]');
+         if(footerRightsP && translations[currentLanguage]['footerRights']) {
+             footerRightsP.textContent = translations[currentLanguage]['footerRights'].replace('{year}', year);
+         } else if(yearSpan) {
+             yearSpan.textContent = year; // Fallback
+         }
+    });
+
+    </script>
+
+</body>
+</html>
