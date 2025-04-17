@@ -1,32 +1,35 @@
 [
-    {
+  {
     "id": "roblox",
-    "title": { 
-      "ar": "روبلوكس", 
-      "en": "Roblox" 
-    },
-    "description": { 
-      "ar": "منصة ألعاب عبر الإنترنت ونظام إنشاء ألعاب شهير يسمح للمستخدمين ببرمجة الألعاب ولعب الألعاب التي أنشأها مستخدمون آخرون.", 
-      "en": "A popular online platform and game creation system allowing users to program games and play games created by others." 
-    },
-    "image": "images/a291e37351b53e19344e8b468ecd6fb8.jpg", // المسار الذي ذكرته
-    "altText": { 
-      "ar": "غلاف لعبة روبلوكس", 
-      "en": "Roblox Cover" 
-    },
-    "category": "sandbox", // يمكنك تغيير الفئة إذا أردت (مثل adventure)
-    "tags": ["sandbox", "mmo", "creative", "building"], // وسوم للعبة
-    "platforms": ["pc", "android", "ios", "xbox"], // المنصات المتوفرة عليها
-    "releaseDate": "2006-09-01", // تاريخ الإصدار الرسمي التقريبي
-    "popularityScore": 98, // درجة شعبية (قيمة تقديرية عالية)
-    "downloadUrl": "REPLACE_WITH_REAL_DOWNLOAD_LINK_ROBLOX" // !! استبدل هذا بالرابط الصحيح
-  }
-,
+    "title": { "ar": "روبلوكس", "en": "Roblox" },
+    "description": { "ar": "منصة ألعاب عبر الإنترنت ونظام إنشاء ألعاب شهير يسمح للمستخدمين ببرمجة الألعاب ولعب الألعاب التي أنشأها مستخدمون آخرون.", "en": "A popular online platform and game creation system allowing users to program games and play games created by others." },
+    "image": "image/a291e37351b53e19344e8b468ecd6fb8.jpg",
+    "altText": { "ar": "غلاف لعبة روبلوكس", "en": "Roblox Cover" },
+    "category": "sandbox",
+    "tags": ["sandbox", "mmo", "creative", "building"],
+    "platforms": ["pc", "android", "ios", "xbox"],
+    "releaseDate": "2006-09-01",
+    "popularityScore": 98,
+    "downloadUrl": "https://drive.google.com/drive/folders/10VzjO6RI2EM7z3uEOUCi0V34sKS5rYFk?fbclid=IwAR2PMGcJuPsjcGUs5Uk6OH0HgGJhU1npGH2Pyp1EO5SqDsPpxlGWiuW8Vbg"
+  },
+  {
+    "id": "game1",
+    "title": { "ar": "اسم اللعبة الأولى", "en": "First Game Title" },
+    "description": { "ar": "وصف مختصر وجذاب للعبة الأولى.", "en": "A short and engaging description for the first game." },
+    "image": "image/placeholder-game1.jpg",
+    "altText": { "ar": "غلاف لعبة 1", "en": "Game 1 Cover" },
+    "category": "action",
+    "tags": ["action", "adventure"],
+    "platforms": ["pc", "android"],
+    "releaseDate": "2025-04-15",
+    "popularityScore": 85,
+    "downloadUrl": "YOUR_REAL_LINK_FOR_GAME_1"
+  },
   {
     "id": "game2",
     "title": { "ar": "لعبة استراتيجية X", "en": "Strategy Game X" },
     "description": { "ar": "لعبة استراتيجية تعتمد على التخطيط.", "en": "Strategy game focused on planning." },
-    "image": "images/placeholder-game2.jpg",
+    "image": "image/placeholder-game2.jpg",
     "altText": { "ar": "غلاف لعبة 2", "en": "Game 2 Cover" },
     "category": "strategy",
     "tags": ["strategy", "building"],
