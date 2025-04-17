@@ -8,7 +8,7 @@
       "ar": "منصة ألعاب عبر الإنترنت ونظام إنشاء ألعاب شهير يسمح للمستخدمين ببرمجة الألعاب ولعب الألعاب التي أنشأها مستخدمون آخرون.", 
       "en": "A popular online platform and game creation system allowing users to program games and play games created by others." 
     },
-    "image": "images/a291e37351b53e19344e8b468ecd6fb8.jpg", // المسار الذي ذكرته
+    "image": "image/a291e37351b53e19344e8b468ecd6fb8.jpg", // المسار الذي ذكرته
     "altText": { 
       "ar": "غلاف لعبة روبلوكس", 
       "en": "Roblox Cover" 
@@ -18,5 +18,5 @@
     "platforms": ["pc", "android", "ios", "xbox"], // المنصات المتوفرة عليها
     "releaseDate": "2006-09-01", // تاريخ الإصدار الرسمي التقريبي
     "popularityScore": 98, // درجة شعبية (قيمة تقديرية عالية)
-    "downloadUrl": "REPLACE_WITH_REAL_DOWNLOAD_LINK_ROBLOX" // !! استبدل هذا بالرابط الصحيح
+    "downloadUrl": "https://drive.google.com/drive/folders/10VzjO6RI2EM7z3uEOUCi0V34sKS5rYFk?fbclid=IwAR2PMGcJuPsjcGUs5Uk6OH0HgGJhU1npGH2Pyp1EO5SqDsPpxlGWiuW8Vbg" // !! استبدل هذا بالرابط الصحيح
   }
