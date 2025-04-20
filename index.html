@@ -24,18 +24,43 @@
             --font-family: 'Cairo', sans-serif; /* استخدام الخط المضاف */
         }
 
-        /* ... (إعادة التعيين الأساسية والخط - كما كانت) ... */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--primary-bg-color); font-family: var(--font-family); color: var(--text-color); line-height: 1.6; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; /* تعديل بسيط للهوامش الجانبية للحاوية */ }
+        /* إعادة تعيين أساسية وتحديد الخط */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--primary-bg-color);
+            font-family: var(--font-family);
+            color: var(--text-color);
+            line-height: 1.6;
+            direction: rtl; /* Ensure RTL direction */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px; /* تعديل بسيط للهوامش الجانبية للحاوية */
+        }
 
         /* الهيدر */
-        header { text-align: center; padding: 30px 0; border-bottom: 1px solid var(--secondary-bg-color); margin-bottom: 30px; }
-        header h1 { font-size: 2.5rem; letter-spacing: 2px; color: var(--accent-color); margin-bottom: 10px; }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--secondary-bg-color);
+            margin-bottom: 30px;
+        }
 
-        /* ======================================== */
-        /* == قسم اللافتة الإعلانية الجديد == */
-        /* ======================================== */
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        /* قسم اللافتة الإعلانية */
         .promo-banner-section {
             margin-bottom: 40px; /* مسافة بين اللافتة وقسم البحث */
         }
@@ -58,38 +83,178 @@
             width: 100%; /* يجعل الصورة تملأ عرض الرابط الحاوي لها */
             max-width: 100%; /* يضمن عدم تجاوز الصورة لعرض الحاوية */
             height: auto; /* يحافظ على نسبة أبعاد الصورة عند تغيير العرض */
-            /* لا نحتاج border-radius هنا لأننا طبقنا overflow: hidden على الرابط */
         }
-        /* ======================================== */
-        /* == نهاية قسم اللافتة الإعلانية == */
-        /* ======================================== */
-
 
         /* قسم البحث */
-        .search-section { margin-bottom: 40px; text-align: center; }
-        .search-input { width: 100%; /* تعديل بسيط ليأخذ عرض الحاوية بالكامل داخل قسمه */ max-width: 500px; padding: 15px 20px; border-radius: var(--button-border-radius); border: 1px solid var(--secondary-bg-color); background-color: var(--secondary-bg-color); color: var(--text-color); font-size: 1rem; font-family: var(--font-family); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-        .search-input::placeholder { color: var(--secondary-text-color); }
-        .search-input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3); }
+        .search-section {
+            margin-bottom: 40px;
+            text-align: center;
+        }
 
-        /* ... (باقي كود CSS لشبكة التطبيقات، البطاقات، الأزرار، الفوتر، والاستجابة - كما كان) ... */
-         .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
-        .app-card { background-color: var(--secondary-bg-color); padding: 20px; border-radius: var(--card-border-radius); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
-        .app-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
-        .app-card img { width: 120px; height: 120px; border-radius: 20px; margin: 0 auto 15px auto; object-fit: cover; display: block; }
-        .app-card h3 { font-size: 1.2rem; margin-bottom: 8px; color: var(--text-color); }
-        .app-platforms { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; font-size: 0.9rem; color: var(--secondary-text-color); }
-        .app-platforms i { font-size: 1.1rem; }
-        .install-btn { background-color: var(--accent-color); color: var(--text-color); padding: 12px 15px; border-radius: var(--button-border-radius); text-decoration: none; display: block; margin-top: 15px; font-weight: bold; transition: background-color 0.3s ease; border: none; cursor: pointer; font-family: var(--font-family); font-size: 1rem; }
-        .install-btn i { margin-left: 8px; }
-        .install-btn:hover { background-color: var(--accent-hover-color); }
-        footer { text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid var(--secondary-bg-color); color: var(--secondary-text-color); font-size: 0.9rem; }
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
-        @media (max-width: 768px) { header h1 { font-size: 2rem; } .search-input { width: 90%; } .app-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; } .app-card img { width: 100px; height: 100px; } .app-card h3 { font-size: 1.1rem; } }
-        @media (max-width: 480px) { .app-grid { grid-template-columns: 1fr; } .container { padding: 0 10px; } header h1 { font-size: 1.8rem; } .search-input { width: 95%; padding: 12px 15px; } }
+        .search-input {
+            width: 100%; /* تعديل بسيط ليأخذ عرض الحاوية بالكامل داخل قسمه */
+            max-width: 500px;
+            padding: 15px 20px;
+            border-radius: var(--button-border-radius);
+            border: 1px solid var(--secondary-bg-color);
+            background-color: var(--secondary-bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-family);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
+        .search-input::placeholder {
+            color: var(--secondary-text-color);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3); /* ظل خفيف عند التركيز */
+        }
+
+        /* شبكة التطبيقات */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* تصميم شبكي مرن */
+            gap: 25px; /* مسافة أكبر بين البطاقات */
+        }
+
+        .app-card {
+            background-color: var(--secondary-bg-color);
+            padding: 20px;
+            border-radius: var(--card-border-radius);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* تأثير انتقالي */
+            display: flex; /* لتسهيل الفلترة عبر جافاسكربت */
+            flex-direction: column;
+            justify-content: space-between; /* توزيع المساحة داخل البطاقة */
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px); /* تأثير رفع عند التحويم */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-card img {
+            width: 120px; /* حجم أكبر للأيقونة */
+            height: 120px;
+            border-radius: 20px; /* زوايا أكثر استدارة */
+            margin: 0 auto 15px auto; /* توسيط وتحديد المسافة السفلية */
+            object-fit: cover; /* ضمان ملء الصورة للمساحة */
+            display: block;
+        }
+
+        .app-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            word-wrap: break-word; /* Ensure long titles wrap */
+        }
+
+        .app-platforms {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+        .app-platforms i {
+            font-size: 1.1rem;
+        }
+
+        .install-btn {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 12px 15px;
+            border-radius: var(--button-border-radius);
+            text-decoration: none;
+            display: block; /* جعل الزر يملأ العرض المتاح */
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s ease; /* تأثير انتقالي للون الخلفية */
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-size: 1rem;
+        }
+
+        .install-btn i { /* أيقونة التحميل */
+            margin-left: 8px; /* For RTL */
+        }
+
+        .install-btn:hover {
+            background-color: var(--accent-hover-color); /* تغيير اللون عند التحويم */
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--secondary-bg-color);
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+         /* لإخفاء الـ label بصرياً مع الحفاظ عليها لـ screen readers */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* تعديلات للشاشات الأصغر */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .search-input {
+                width: 90%;
+            }
+            .app-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* أعمدة أصغر قليلاً */
+                gap: 15px;
+            }
+            .app-card img {
+                 width: 100px;
+                 height: 100px;
+            }
+            .app-card h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+         @media (max-width: 480px) {
+            .app-grid {
+                grid-template-columns: 1fr; /* عمود واحد على الشاشات الصغيرة جداً */
+            }
+             .container {
+                 padding: 0 10px;
+             }
+             header h1 {
+                 font-size: 1.8rem;
+             }
+             .search-input {
+                 width: 95%;
+                 padding: 12px 15px;
+             }
+         }
     </style>
 
-</head>
+    <script type="text/javascript">
+        var WAiPg_zRm_QUCPec={"it":4472891,"key":"b660c"};
+    </script>
+    <script src="https://d2v7l2267atlz5.cloudfront.net/c1454fc.js"></script>
+    </head>
 <body>
 
     <header>
@@ -102,10 +267,11 @@
     <section class="promo-banner-section">
         <div class="container">
              <a href="#" class="promo-banner-link" target="_blank" rel="noopener noreferrer">
-                 <img src="PLACEHOLDER_BANNER_IMAGE_URL" alt="لافتة إعلانية ترويجية" class="promo-banner-image"/>
+                <img src="PLACEHOLDER_BANNER_IMAGE_URL" alt="لافتة إعلانية ترويجية" class="promo-banner-image"/>
             </a>
         </div>
     </section>
+
     <main class="container">
         <section class="search-section">
              <label for="searchInput" class="sr-only">ابحث عن تطبيق أو لعبة</label>
@@ -113,70 +279,90 @@
         </section>
 
         <section class="app-grid" id="appGrid">
+
             <div class="app-card">
                 <img src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png" alt="GTA 5 Poster"/>
                 <div>
                     <h3>GTA 5</h3>
                     <div class="app-platforms"> <i class="fa-solid fa-desktop" title="كمبيوتر شخصي"></i> <i class="fa-solid fa-mobile-screen-button" title="موبايل"></i> </div>
-                    <a href="https://smrturl.co/a/s0fcd8a71ed/792?s1=gta5_card" class="install-btn" target="_blank" rel="noopener noreferrer"> تثبيت <i class="fa-solid fa-download"></i> </a>
+                     <a href="javascript:void(0);" class="install-btn" onclick="_qr()">
+                        تثبيت <i class="fa-solid fa-download"></i>
+                    </a>
                 </div>
             </div>
+
             <div class="app-card">
                 <img src="PLACEHOLDER_FORTNITE_IMAGE_URL" alt="Fortnite Mobile"/>
                 <div>
                     <h3>FORTNITE MOBILE</h3>
                     <div class="app-platforms"> <i class="fa-solid fa-mobile-screen-button" title="موبايل"></i> <i class="fa-solid fa-desktop" title="كمبيوتر شخصي"></i> </div>
-                    <a href="https://smrturl.co/a/s0fcd8a71ed/4814?s1=fortnite_card" class="install-btn" target="_blank" rel="noopener noreferrer"> تثبيت <i class="fa-solid fa-download"></i> </a>
+                     <a href="javascript:void(0);" class="install-btn" onclick="_qr()">
+                        تثبيت <i class="fa-solid fa-download"></i>
+                    </a>
                 </div>
             </div>
+
              <div class="app-card">
                 <img src="PLACEHOLDER_MINECRAFT_IMAGE_URL" alt="Minecraft"/>
                 <div>
                     <h3>MINECRAFT</h3>
                     <div class="app-platforms"> <i class="fa-solid fa-desktop" title="كمبيوتر شخصي"></i> <i class="fa-solid fa-mobile-screen-button" title="موبايل"></i> </div>
-                     <a href="https://smrturl.co/a/s0fcd8a71ed/1779?s1=minecraft_card" class="install-btn" target="_blank" rel="noopener noreferrer"> تثبيت <i class="fa-solid fa-download"></i> </a>
+                     <a href="javascript:void(0);" class="install-btn" onclick="_qr()">
+                        تثبيت <i class="fa-solid fa-download"></i>
+                    </a>
                 </div>
             </div>
-             <div class="app-card">
+
+            <div class="app-card">
                 <img src="PLACEHOLDER_POPPY_IMAGE_URL" alt="Poppy Playtime"/>
                 <div>
                     <h3>POPPY PLAYTIME</h3>
                     <div class="app-platforms"> <i class="fa-solid fa-mobile-screen-button" title="موبايل"></i> <i class="fa-solid fa-desktop" title="كمبيوتر شخصي"></i> </div>
-                    <a href="https://smrturl.co/a/s0fcd8a71ed/792?s1=poppy_card" class="install-btn" target="_blank" rel="noopener noreferrer"> تثبيت <i class="fa-solid fa-download"></i> </a>
+                     <a href="javascript:void(0);" class="install-btn" onclick="_qr()">
+                        تثبيت <i class="fa-solid fa-download"></i>
+                    </a>
                 </div>
             </div>
+
              <div class="app-card">
                 <img src="PLACEHOLDER_FIFA_IMAGE_URL" alt="FIFA 22"/>
                 <div>
                     <h3>FIFA 22</h3>
                     <div class="app-platforms"> <i class="fa-solid fa-desktop" title="كمبيوتر شخصي"></i> </div>
-                     <a href="https://smrturl.co/a/s0fcd8a71ed/4814?s1=fifa_card" class="install-btn" target="_blank" rel="noopener noreferrer"> تثبيت <i class="fa-solid fa-download"></i> </a>
+                     <a href="javascript:void(0);" class="install-btn" onclick="_qr()">
+                        تثبيت <i class="fa-solid fa-download"></i>
+                    </a>
                 </div>
             </div>
+
              <div class="app-card">
                 <img src="PLACEHOLDER_SPIDERMAN_IMAGE_URL" alt="Spider-Man Game"/>
                 <div>
                     <h3>SPIDER MAN</h3>
                     <div class="app-platforms"> <i class="fa-solid fa-desktop" title="كمبيوتر شخصي"></i> </div>
-                    <a href="https://smrturl.co/a/s0fcd8a71ed/1779?s1=spiderman_card" class="install-btn" target="_blank" rel="noopener noreferrer"> تثبيت <i class="fa-solid fa-download"></i> </a>
+                     <a href="javascript:void(0);" class="install-btn" onclick="_qr()">
+                        تثبيت <i class="fa-solid fa-download"></i>
+                    </a>
                 </div>
             </div>
+
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 5 APPS.SHOP - جميع الحقوق محفوظة.</p>
+            <p>&copy; <span id="currentYear"></span> 5 APPS.SHOP - جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <script>
-        // ... (نفس كود JavaScript الخاص بالبحث - لا تغيير هنا) ...
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
         const searchInput = document.getElementById('searchInput');
         const appGrid = document.getElementById('appGrid');
-        const appCards = appGrid.getElementsByClassName('app-card');
+        const getAppCards = () => appGrid.getElementsByClassName('app-card');
         searchInput.addEventListener('input', function() {
             const searchTerm = searchInput.value.toLowerCase().trim();
+            const appCards = getAppCards();
             for (let i = 0; i < appCards.length; i++) {
                 const card = appCards[i];
                 const titleElement = card.querySelector('h3');
